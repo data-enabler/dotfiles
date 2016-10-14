@@ -1,0 +1,84 @@
+# Utils
+alias e="edward"
+
+# Yext
+export ALPHA=${ALPHA:-~/git/alpha}
+export ALPHA_HOME=$ALPHA
+
+# Build
+export PATH=$PATH:$ALPHA/tools/khan
+export ANT_OPTS='-Xmx2G'
+#JVM_ARGS='-Dparallel=true -DretryCount=3 -Dyext.runmode=sandbox' 
+alias srcclean='rm -rf build; find src/com/yext -name 'tmp' | xargs rm -rf'
+alias icbm='python tools/icbm/build.py'
+alias icbmtestall='python tools/icbm/build.py :tests && ant test-icbm'
+alias icbmtest='python tools/icbm/build.py :tests && ./build/tests/tests org.junit.runner.JUnitCore $*'
+alias play='thirdparty/play/play'
+function bplay() {
+  echo -e '\033k'$1'\033\\' && icbm :$1_dev && play test src/com/yext/$1 ${@:2}
+}
+function bplayprod() {
+  echo -e '\033k'$1'\033\\' && icbm :$1_dev && YEXT_SITE=nj1 play test src/com/yext/$1 ${@:2}
+}
+function brun() {
+  echo -e '\033k'$1'\033\\' && icbm :$1 && YEXT_SITE=office JVM_ARGS='-Xmx3G' build/$1/$1 ${@:2}
+}
+export PLAY_ICBM_RELOAD=true
+alias protos="make -C $ALPHA/gocode/src/yext protos"
+
+# HAProxy
+alias haproxy="bash $ALPHA/tools/bin/haproxy_localhost.sh"
+
+# MySQL
+export PATH="/usr/local/mysql/bin:$PATH"
+#export PATH="/usr/local/mysql-5.6.16-osx10.7-x86_64/bin:$PATH"
+
+# Postgres
+export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.4/bin
+
+# JS
+function buildjs() {
+  for t in "$@"
+  do
+    bjst "${t}"
+  done
+
+  if [ $# = 0 ]; then
+    bjst
+  fi
+}
+function bjst() {
+  local p="src/com/yext"
+  if [ ! -z "$1" ]; then
+    p="${p}/${1}"
+  fi
+
+  for i in $(find "${p}" -name prod-config.js)
+  do
+    d=$(dirname $i)
+    echo "compiling ${d:13}..."
+    output=$($ALPHA/tools/bin/plovr.sh build $i 2>&1 > /dev/null)
+    echo "$output"
+  done
+}
+
+# Go
+export GOROOT=/usr/local/opt/go/libexec
+export PATH=$PATH:$GOROOT/bin
+export GOPATH=$ALPHA/gocode
+export PATH=$PATH:$GOPATH/bin
+
+# Git
+alias upload="python $ALPHA/tools/hg/upload.py --cc commando@yext.com --nosend_mail --email amullings@yext.com"
+up() {
+	local rev="@~${1:-0}^!"
+	git diff $rev | grep -C3 --color=always println || upload --rev=$rev
+}
+
+# Misc
+function ports() {
+	grep -r ^port:.*= $ALPHA/production/jobs | sed -E 's/^.*\/([a-zA-Z0-9]+)\.job.*"([a-z]+)=([0-9]+)"$/\3 \2 \1/' | sort -g | less
+}
+
+cd $ALPHA
+
