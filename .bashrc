@@ -7,12 +7,15 @@ set -o vi
 # Prompt
 source ~/.git-prompt.sh
 export CLICOLOR=1
+export PS1='\[\e[1;32m\]\u@\h:\w${text}$\[\e[m\] '
 fancy_prompt() {
   local c1=$(tput setaf 4)
   local c2=$(tput setaf 33)
   local c3=$(tput setaf 39)
   local reset=$(tput sgr0)
-  PS1="\[$c2\]\t \[$c1\]\W\[$c3\]\$(__git_ps1)\\$\[$reset\] "
+  if [ -n "$SSH_CLIENT" ]; then local sshtext="[$(hostname -s)] "
+  fi
+  PS1="${sshtext}\[$c2\]\t \[$c1\]\W\[$c3\]\$(__git_ps1)\\$\[$reset\] "
 }
 fancy_prompt
 

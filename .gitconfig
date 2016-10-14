@@ -51,10 +51,7 @@
  
 [core]
 	precomposeunicode = true
-	excludesfile = /Users/amullings/.gitignore_global
-[user]
-	name = Adrian Mullings
-	email = amullings@yext.com
+	excludesfile = ~/.gitignore_global
 [difftool "Kaleidoscope"]
 	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
 [mergetool "Kaleidoscope"]
