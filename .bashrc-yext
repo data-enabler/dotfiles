@@ -69,7 +69,7 @@ export GOPATH=$ALPHA/gocode
 export PATH=$PATH:$GOPATH/bin
 
 # Git
-alias upload="python $ALPHA/tools/hg/upload.py --cc commando@yext.com --nosend_mail --email amullings@yext.com"
+alias upload="git upload"
 up() {
 	local rev="@~${1:-0}^!"
 	git diff $rev | grep -C3 --color=always println || upload --rev=$rev
