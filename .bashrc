@@ -52,7 +52,7 @@ function gitgrepblame() {
 alias pysrv="python -m SimpleHTTPServer"
 alias ding="printf \\\\a"
 alias dun="say done"
-function t() {
+function t {
 	local TIMEFORMAT=%Rs
 	local start=$SECONDS
 	($*)
@@ -61,6 +61,14 @@ function t() {
 	osascript -e "display notification \"$*\" with title \"Command finished in ${time}s\" sound name \"Pop\""
 	echo ${time}s
 	say "Command finished in $time seconds"
+}
+function mvln {
+	original="$1" target="$2"
+	if [ -d "$target" ]; then
+	  target="$target/${original##*/}"
+	fi
+	mv -- "$original" "$target"
+	ln -s -- "$target" "$original"
 }
 
 # Git
