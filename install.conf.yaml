@@ -14,6 +14,12 @@
     ~/.gitconfig: '.gitconfig'
     ~/.slate.js: '.slate.js'
     ~/.config/pianobar/config: 'pianobar-config'
+    ~/.atom/config.cson: 'atom/config.cson'
+    ~/.atom/init.coffee: 'atom/init.coffee'
+    ~/.atom/keymap.cson: 'atom/keymap.cson'
+    ~/.atom/packages.cson: 'atom/packages.cson'
+    ~/.atom/snippets.cson: 'atom/snippets.cson'
+    ~/.atom/styles.less: 'atom/styles.less'
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]

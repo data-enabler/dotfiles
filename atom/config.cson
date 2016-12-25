@@ -1,0 +1,33 @@
+"*":
+  core:
+    telemetryConsent: "no"
+    themes: [
+      "isotope-ui"
+      "one-dark-syntax"
+    ]
+  editor:
+    fontSize: 11
+    preferredLineLength: 100
+    showInvisibles: true
+  "exception-reporting":
+    userId: "6919e080-4bfd-c1a2-4c55-20b9c2b22665"
+  "isotope-ui":
+    customBackgroundColor: true
+    customBackgroundColorPicker: "#20232b"
+    minimalMode: true
+  linter: {}
+  "seti-ui":
+    compactView: true
+  "split-diff":
+    diffWords: true
+    ignoreWhitespace: true
+    leftEditorColor: "red"
+    rightEditorColor: "green"
+    syncHorizontalScroll: true
+  "tree-view":
+    hideVcsIgnoredFiles: true
+  welcome:
+    showOnStartup: false
+  zentabs:
+    maximumOpenedTabs: 10
+    neverCloseUnsaved: true
