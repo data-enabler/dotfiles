@@ -32,7 +32,7 @@ shopt -s histappend
 alias rehist="history -c; history -r"
 
 # Recursive globbing
-shopt -s globstar
+shopt | grep -q globstar && shopt -s globstar
 
 # Command Line
 alias grp="grep -rIn --color=always"
