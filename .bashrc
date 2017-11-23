@@ -87,8 +87,9 @@ alias g=git
 # Config Editing
 alias bconf="vim -p ~/.bashrc ${BASHFILES[@]}"
 alias bload="source ~/.bashrc"
-alias vconf="vim ~/.vimrc"
 alias gconf="vim -p ~/.gitconfig ${GITFILES[@]}"
+alias vconf="vim ~/.vimrc"
+alias tconf="vim ~/.tmux.conf"
 
 # Go
 alias gobuild="go build . && go tool vet . && go tool vet -shadow . &&"
