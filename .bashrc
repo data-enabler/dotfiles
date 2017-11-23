@@ -85,7 +85,7 @@ alias got=git
 alias g=git
 
 # Config Editing
-alias bconf="vim -p ~/.bashrc ${BASHFILES[@]:-${BASH_SOURCE[0]}}"
+alias bconf="vim -p ~/.bashrc ${BASHFILES[@]}"
 alias bload="source ~/.bashrc"
 alias vconf="vim ~/.vimrc"
 alias gconf="vim -p ~/.gitconfig ${GITFILES[@]}"
