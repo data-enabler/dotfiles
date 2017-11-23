@@ -4,6 +4,11 @@ set shiftwidth=4
 set number
 set hlsearch
 syntax on
-colorscheme vividchalk
 set background=dark
+
+call plug#begin('~/.vim/plugged')
+Plug 'tpope/vim-vividchalk'
+call plug#end()
+
+colorscheme vividchalk
 

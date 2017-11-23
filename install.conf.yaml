@@ -24,5 +24,9 @@
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
-  - ['curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh -o ~/.git-prompt.sh', Installing Git prompt script]
-  - ['mkdir -p ~/.vim/colors && curl -L https://github.com/tpope/vim-vividchalk/raw/master/colors/vividchalk.vim -o ~/.vim/colors/vividchalk.vim', Installing vividchalk Vim color scheme]
+  - ['curl -fo ~/.git-prompt.sh
+    https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh',
+    Installing Git prompt script]
+  - ['curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim',
+    Installing vim-plug]
