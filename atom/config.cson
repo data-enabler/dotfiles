@@ -33,7 +33,7 @@
   linter: {}
   "linter-ui-default": {}
   "package-sync":
-    createOnChange: true
+    createOnChange: false
     forceOverwrite: true
   "seti-ui":
     compactView: true
