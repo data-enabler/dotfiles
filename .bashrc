@@ -10,15 +10,19 @@ export PROMPT_COMMAND='history -a'
 export CLICOLOR=1
 export PS1='\[\e[1;32m\]\u@\h:\w${text}$\[\e[m\] '
 fancy_prompt() {
-  local c1=$(tput setaf 4)
+  local c1=$(tput setaf 39)
   local c2=$(tput setaf 33)
-  local c3=$(tput setaf 39)
+  local c3=$(tput setaf 26)
   local reset=$(tput sgr0)
   if [ -n "$SSH_CLIENT" ]; then local sshtext="[$(hostname -s)] "
   fi
-  PS1="${sshtext}\[$c2\]\t \[$c1\]\W\[$c3\]\$(__git_ps1)\\$\[$reset\] "
+  PS1="\[$c3\]${sshtext}\[$c2\]\t \[$c1\]\W\[$c3\]\$(__git_ps1)\[$c1\]\\$\[$reset\] "
 }
 fancy_prompt
+
+# ls
+export LSCOLORS=gxfxcxdxbxegedabagacad
+export LS_COLORS='di=36:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43'
 
 # Path
 export PATH=/usr/local/bin:$PATH
@@ -39,6 +43,7 @@ alias grp="grep -rIn --color=always"
 alias egrp="grp -E"
 alias fgrp="grp -F"
 alias ff="find . -name "
+alias pg="ps aux | grep"
 
 function hggrepblame() {
 	for file in `grp -l "$1" $2`; do hg blame -dunl $file | grp "$1"; done
@@ -77,6 +82,7 @@ if [ -f ~/.git-completion.bash ]; then
 fi
 alias gti=git
 alias got=git
+alias g=git
 
 # Config Editing
 alias bconf="vim -p ~/.bashrc ${BASHFILES[@]:-${BASH_SOURCE[0]}}"

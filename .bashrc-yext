@@ -1,5 +1,12 @@
 # Utils
 alias e="edward"
+alias es="edward status"
+alias er="edward restart"
+alias ep="edward stop"
+alias et="edward tail"
+ert() {
+  edward restart $1 && edward tail $1
+}
 
 # Yext
 export ALPHA=${ALPHA:-~/git/alpha}
@@ -28,6 +35,9 @@ alias protos="make -C $ALPHA/gocode/src/yext protos"
 
 # HAProxy
 alias haproxy="bash $ALPHA/tools/bin/haproxy_localhost.sh"
+
+# Terraform
+alias tp="terraform plan | tee plan.txt"
 
 # MySQL
 export PATH="/usr/local/mysql/bin:$PATH"
@@ -71,8 +81,13 @@ export PATH=$PATH:$GOPATH/bin
 # Git
 alias upload="git upload"
 up() {
-	local rev="@~${1:-0}^!"
-	git diff $rev | grep -C3 --color=always println || upload --rev=$rev
+	local rev="@^!"
+	# Can optionally specify a number of commits back in history
+	if [[ $1 =~ ^[0-9]+$ ]] ; then
+		rev="@~${1}^!"
+		shift;
+	fi
+	git diff $rev | grep -C3 --color=always println || upload --rev=$rev $*
 }
 
 # Misc

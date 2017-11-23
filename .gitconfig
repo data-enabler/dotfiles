@@ -2,13 +2,15 @@
 	name = Adrian Mullings
 	email = adralemechk@gmail.com
 [alias]
+	# status
 	st = status -sb
-	ci = commit
-	br = branch -v
-	co = checkout
-	df = diff
-	ds = diff --staged
-	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	ls = ls-files
+	out = "!git log origin/master..$(git rev-parse --abbrev-ref HEAD)"
+	in = "!git log $(git rev-parse --abbrev-ref HEAD)..origin/master"
+
+	# log
+	lg = log --color --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	lgg = "!git lg --graph"
 	l1 = "!git lg -1"
 	l2 = "!git lg -2"
 	l3 = "!git lg -3"
@@ -17,30 +19,49 @@
 	l10 = "!git lg -10"
 	lol = log --graph --decorate --pretty=oneline --abbrev-commit
 	lola = log --graph --decorate --pretty=oneline --abbrev-commit --all --date=local
-	ls = ls-files
-	unstage = reset HEAD
-	out = "!git log origin/master..$(git rev-parse --abbrev-ref HEAD)"
-	in = "!git log $(git rev-parse --abbrev-ref HEAD)..origin/master"
+
+	# diffs
+	df = diff
+	ds = diff --stat
+	kd = difftool -y -t Kaleidoscope
+	km = mergetool -y -t Kaleidoscope
+	vd = difftool -y -t vimdiff
+
+	# commits
+	ai = add -i
+	cm = commit
+	ca = commit -a
+	cam = commit -a --amend
+	cane = commit -a --amend --no-edit
+
+	# merging
 	pull = pull --ff-only
 	merge = merge --ff-only
-
-	# Show files ignored by git:
-	ign = ls-files -o -i --exclude-standard
-	ca = commit -a --amend
-	cane = commit -a --amend --no-edit
-	ks = difftool -y -t Kaleidoscope
-	vd = difftool -y -t vimdiff
 	pr = pull --rebase
 	prom = pull --rebase origin master
 	prod = pull --rebase origin develop
-	bl = branch --list -vv
+	ri = rebase -i
 	rc = rebase --continue
-	alias = !sh -c 'git config --get-regexp ^alias\\.$1' -
+	conflicts = diff --name-only --diff-filter=U
+	resolve = "!git conflicts | xargs git add"
+
+	# branches
+	co = checkout
+	cb = checkout -b
+	bl = branch --list -vv
+	br = branch -v
+	bd = branch -d
+	bdd = branch -D
+
+	# meta
+	#alias = !sh -c 'git config --get-regexp ^alias\\.$1' -
+	alias = !git config --get-regexp ^alias\\.$1
+
+	# misc
+	ut = ls-files --others --exclude-standard
+	ign = ls-files -o -i --exclude-standard # Show files ignored by git:
 	patchnotes = !sh -c 'git log --no-merges `git describe --abbrev=0 $1^`..$1' -
 	#hist = !sh -c 'git rev-list @ $0 | echo sed '"'"'$2q\\;d'"'"'' -
-	conflicts = diff --name-only --diff-filter=U
-	#resolve = !sh -c 'git conflicts | xargs git add' -
-	resolve = "!git conflicts | xargs git add"
 
 [diff]
     renameLimit = 2000

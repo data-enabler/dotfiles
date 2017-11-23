@@ -33,3 +33,10 @@
 
 'atom-workspace':
   'alt-\\': 'tree-view:toggle-focus'
+  'f2': 'linter-ui-default:next-error'
+
+'.platform-darwin atom-text-editor':
+  'cmd-f2': 'unset!'
+
+'atom-text-editor.vim-mode-plus:not(.insert-mode)':
+  ', f f': 'fuzzy-grep:toggle'

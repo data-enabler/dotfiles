@@ -1,4 +1,11 @@
 "*":
+  "atom-fuzzy-grep":
+    detectGitProjectAndUseGitGrep: false
+    grepCommandString: "rg -n -H --no-heading --column"
+  "better-git-blame":
+    searchInLayerEnabled: false
+  "bracket-matcher":
+    autocompleteBrackets: false
   core:
     telemetryConsent: "no"
     themes: [
@@ -11,11 +18,23 @@
     showInvisibles: true
   "exception-reporting":
     userId: "6919e080-4bfd-c1a2-4c55-20b9c2b22665"
+  "go-plus":
+    disabledBundledPackages: [
+      "go-debug"
+    ]
+    panel:
+      displayMode: "closed"
+      focusOnFailure: false
+    panelDisplayMode: "closed"
   "isotope-ui":
     customBackgroundColor: true
     customBackgroundColorPicker: "#20232b"
     minimalMode: true
   linter: {}
+  "linter-ui-default": {}
+  "package-sync":
+    createOnChange: true
+    forceOverwrite: true
   "seti-ui":
     compactView: true
   "split-diff":
@@ -23,9 +42,11 @@
     ignoreWhitespace: true
     leftEditorColor: "red"
     rightEditorColor: "green"
+    scrollSyncType: "Vertical + Horizontal"
     syncHorizontalScroll: true
   "tree-view":
     hideVcsIgnoredFiles: true
+  "vim-mode-plus": {}
   welcome:
     showOnStartup: false
   zentabs:
