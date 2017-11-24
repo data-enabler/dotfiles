@@ -92,6 +92,8 @@ alias vconf="vim ~/.vimrc"
 alias tconf="vim ~/.tmux.conf"
 
 # Go
+export GOPATH=~/gocode
+export PATH=$PATH:$GOPATH/bin
 alias gobuild="go build . && go tool vet . && go tool vet -shadow . &&"
 function gorun { gobuild "./${PWD##*/}"; }
 
