@@ -13,6 +13,7 @@
     ~/.vimrc: '.vimrc'
     ~/.gitconfig: '.gitconfig'
     ~/.tmux.conf: '.tmux.conf'
+    ~/.tmux: '.tmux'
     ~/.slate.js: '.slate.js'
     ~/.config/pianobar/config: 'pianobar-config'
     ~/.atom/config.cson: 'atom/config.cson'
