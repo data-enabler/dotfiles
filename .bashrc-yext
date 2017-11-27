@@ -1,3 +1,8 @@
+# Yext
+export YEXT_OFFICE=ny
+export ALPHA=${ALPHA:-~/git/alpha}
+export ALPHA_HOME=$ALPHA
+
 # Utils
 alias e="edward"
 alias es="edward status"
@@ -7,10 +12,6 @@ alias et="edward tail"
 ert() {
   edward restart $1 && edward tail $1
 }
-
-# Yext
-export ALPHA=${ALPHA:-~/git/alpha}
-export ALPHA_HOME=$ALPHA
 
 # Build
 export PATH=$PATH:$ALPHA/tools/khan
@@ -32,9 +33,6 @@ function brun() {
 }
 export PLAY_ICBM_RELOAD=true
 alias protos="make -C $ALPHA/gocode/src/yext protos"
-
-# HAProxy
-alias haproxy="bash $ALPHA/tools/bin/haproxy_localhost.sh"
 
 # Terraform
 alias tp="terraform plan | tee plan.txt"
