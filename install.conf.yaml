@@ -11,7 +11,9 @@
       path: '.bashrc'
       force: false
     ~/.vimrc: '.vimrc'
-    ~/.gitconfig: '.gitconfig'
+    ~/.gitconfig:
+      path: '.gitconfig'
+      force: false
     ~/.tmux.conf: '.tmux.conf'
     ~/.tmux: '.tmux'
     ~/.slate.js: '.slate.js'
