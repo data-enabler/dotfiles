@@ -3,6 +3,9 @@ export YEXT_OFFICE=ny
 export ALPHA=${ALPHA:-~/git/alpha}
 export ALPHA_HOME=$ALPHA
 
+# Navigation
+alias cda="cd $ALPHA"
+
 # Utils
 alias e="edward"
 alias es="edward status"
@@ -35,7 +38,8 @@ export PLAY_ICBM_RELOAD=true
 alias protos="make -C $ALPHA/gocode/src/yext protos"
 
 # Terraform
-alias tp="terraform plan | tee plan.txt"
+alias tp="terraform plan | less -r"
+alias tpp="terraform plan -no-color | tee plan.txt | less"
 
 # MySQL
 export PATH="/usr/local/mysql/bin:$PATH"
@@ -75,6 +79,9 @@ export GOROOT=/usr/local/opt/go/libexec
 export PATH=$PATH:$GOROOT/bin
 export GOPATH=$ALPHA/gocode
 export PATH=$PATH:$GOPATH/bin
+
+# Python
+export PYTHONPATH=$PYTHONPATH:/usr/local/lib/python2.7/site-packages
 
 # Git
 alias upload="git upload"

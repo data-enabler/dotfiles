@@ -3,5 +3,5 @@
 	email = amullings@yext.com
 
 [alias]
-	upload = "!python -u $ALPHA/tools/hg/upload.py --cc aether@yext.com --nosend_mail --email amullings@yext.com"
+	upload = !\"$(git rev-parse --show-toplevel)\"/devops/git/bin/upload
 

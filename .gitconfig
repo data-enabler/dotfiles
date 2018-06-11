@@ -8,6 +8,9 @@
 	out = "!git log origin/master..$(git rev-parse --abbrev-ref HEAD)"
 	in = "!git log $(git rev-parse --abbrev-ref HEAD)..origin/master"
 
+	# show
+	ss = show --stat
+
 	# log
 	lg = log --color --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 	lgg = "!git lg --graph"
@@ -54,7 +57,6 @@
 	bdd = branch -D
 
 	# meta
-	#alias = !sh -c 'git config --get-regexp ^alias\\.$1' -
 	alias = !git config --get-regexp ^alias\\.$1
 
 	# misc

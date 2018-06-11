@@ -20,6 +20,11 @@ fancy_prompt() {
 }
 fancy_prompt
 
+# Title
+title() {
+  echo -e '\033k'$1'\033\\'
+}
+
 # ls
 export LSCOLORS=gxfxcxdxbxegedabagacad
 export LS_COLORS='di=36:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43'
@@ -44,6 +49,12 @@ alias egrp="grp -E"
 alias fgrp="grp -F"
 alias ff="find . -name "
 alias pg="ps aux | grep"
+alias wcl="wc -l"
+alias trim="awk '{$1=$1};1'"
+
+function rgl() {
+	rg --color=always --line-number --heading $* | less -RS
+}
 
 function hggrepblame() {
 	for file in `grp -l "$1" $2`; do hg blame -dunl $file | grp "$1"; done
@@ -83,6 +94,9 @@ fi
 alias gti=git
 alias got=git
 alias g=git
+ggb() {
+    git grep -n $1 | while IFS=: read i j k; do git blame -L $j,$j $i | cat; done
+}
 
 # Config Editing
 alias bconf="vim -p ~/.bashrc ${BASHFILES[@]}"
@@ -97,3 +111,11 @@ export PATH=$PATH:$GOPATH/bin
 alias gobuild="go build . && go tool vet . && go tool vet -shadow . &&"
 function gorun { gobuild "./${PWD##*/}"; }
 
+# AWS
+if [ -f ~/.aws/credentials ]; then
+  shopt -s extglob
+  source <(grep = ~/.aws/credentials)
+  export AWS_ACCESS_KEY_ID=${aws_access_key_id//[[:space:]]}
+  export AWS_SECRET_ACCESS_KEY=${aws_secret_access_key//[[:space:]]}
+  shopt -u extglob
+fi
