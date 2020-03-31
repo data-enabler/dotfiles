@@ -51,9 +51,20 @@ alias ff="find . -name "
 alias pg="ps aux | grep"
 alias wcl="wc -l"
 alias trim="awk '{$1=$1};1'"
+alias x="exit"
 
 function rgl() {
-	rg --color=always --line-number --heading $* | less -RS
+	rg --color=always --line-number --heading "$@" | less -RS
+}
+function rgll() {
+	rg --color=always --line-number --heading "$@" | less -R
+}
+
+function agl() {
+	ag --color --numbers --heading "$@" | less -RS
+}
+function agll() {
+	ag --color --numbers --heading "$@" | less -R
 }
 
 function hggrepblame() {
@@ -111,11 +122,8 @@ export PATH=$PATH:$GOPATH/bin
 alias gobuild="go build . && go tool vet . && go tool vet -shadow . &&"
 function gorun { gobuild "./${PWD##*/}"; }
 
-# AWS
-if [ -f ~/.aws/credentials ]; then
-  shopt -s extglob
-  source <(grep = ~/.aws/credentials)
-  export AWS_ACCESS_KEY_ID=${aws_access_key_id//[[:space:]]}
-  export AWS_SECRET_ACCESS_KEY=${aws_secret_access_key//[[:space:]]}
-  shopt -u extglob
+# fzf
+if [ -x "$(command -v fd)" ]; then
+  export FZF_DEFAULT_COMMAND='fd --type f'
 fi
+

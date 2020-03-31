@@ -4,6 +4,8 @@ set tabstop=4
 set shiftwidth=4
 set number
 set hlsearch
+set splitbelow
+set splitright
 
 set visualbell
 set background=dark
@@ -13,6 +15,8 @@ call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-sleuth'
+Plug 'jremmen/vim-ripgrep'
+Plug '/usr/local/opt/fzf'
 Plug 'itchyny/lightline.vim'
 Plug 'edkolev/tmuxline.vim'
 Plug 'tpope/vim-vividchalk'

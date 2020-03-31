@@ -2,22 +2,61 @@
   "atom-fuzzy-grep":
     detectGitProjectAndUseGitGrep: false
     grepCommandString: "rg -n -H --no-heading --column"
+  "atom-ide-ui":
+    "atom-ide-code-format":
+      formatOnSave: true
   "better-git-blame":
     searchInLayerEnabled: false
   "bracket-matcher":
     autocompleteBrackets: false
   core:
-    telemetryConsent: "no"
-    themes: [
-      "isotope-ui"
-      "one-dark-syntax"
+    disabledPackages: [
+      "dash"
+      "close-all-errors"
+      "busy-signal"
+      "firacode"
+      "git-time-machine"
+      "go-signature-statusbar"
+      "intentions"
+      "hyperclick"
+      "open-recent"
+      "zentabs"
+      "atom-fuzzy-grep"
     ]
+    ignoredNames: [
+      ".git"
+      ".hg"
+      ".svn"
+      ".DS_Store"
+      "._*"
+      "Thumbs.db"
+      "desktop.ini"
+      "node_modules"
+    ]
+    packagesWithKeymapsDisabled: [
+      "atom-fuzzy-grep"
+      "find-and-replace"
+    ]
+    telemetryConsent: "no"
+    titleBar: "hidden"
   editor:
-    fontSize: 11
-    preferredLineLength: 100
+    fontSize: 10
+    scrollPastEnd: true
     showInvisibles: true
+  "element-finder":
+    filePatterns: [
+      "*.html"
+      "*.soy"
+      "*.htm"
+      "*.shtml"
+      "*.erb"
+    ]
   "exception-reporting":
     userId: "6919e080-4bfd-c1a2-4c55-20b9c2b22665"
+  "fuzzy-finder":
+    scoringSystem: "fast"
+    useRipGrep: true
+  "fuzzy-finder-plus": {}
   "go-plus":
     disabledBundledPackages: [
       "go-debug"
@@ -31,7 +70,15 @@
     customBackgroundColorPicker: "#20232b"
     minimalMode: true
   linter: {}
-  "linter-ui-default": {}
+  "linter-eslint":
+    global:
+      useGlobalEslint: true
+  "linter-sass-lint":
+    configFile: "~/.sass-lint.yml"
+  "linter-ui-default":
+    panelHeight: 300
+  "one-dark-ui":
+    fontSize: 10
   "package-sync":
     createOnChange: false
     forceOverwrite: true
@@ -44,11 +91,13 @@
     rightEditorColor: "green"
     scrollSyncType: "Vertical + Horizontal"
     syncHorizontalScroll: true
-  "tree-view":
-    hideVcsIgnoredFiles: true
+  "tree-view": {}
   "vim-mode-plus": {}
   welcome:
     showOnStartup: false
   zentabs:
     maximumOpenedTabs: 10
     neverCloseUnsaved: true
+".gfm.source":
+  editor:
+    preferredLineLength: 80

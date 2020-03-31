@@ -78,6 +78,9 @@
 [core]
 	precomposeunicode = true
 	excludesfile = ~/.gitignore_global
+[difftool]
+    # Be able to abort all diffs with `:cq` or `:cquit`
+    trustExitCode = true
 [difftool "Kaleidoscope"]
 	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
 [mergetool "Kaleidoscope"]

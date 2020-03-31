@@ -34,9 +34,13 @@
 'atom-workspace':
   'alt-\\': 'tree-view:toggle-focus'
   'f2': 'linter-ui-default:next-error'
+  'cmd-g': 'fuzzy-grep:toggle'  
 
 '.platform-darwin atom-text-editor':
   'cmd-f2': 'unset!'
 
 'atom-text-editor.vim-mode-plus:not(.insert-mode)':
   ', f f': 'fuzzy-grep:toggle'
+
+'atom-workspace .atom-fuzzy-grep atom-text-editor':
+  'cmd-g': 'fuzzy-grep:toggleFileFilter'

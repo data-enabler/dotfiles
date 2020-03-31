@@ -7,34 +7,36 @@ export ALPHA_HOME=$ALPHA
 alias cda="cd $ALPHA"
 
 # Utils
-alias e="edward"
-alias es="edward status"
-alias er="edward restart"
-alias ep="edward stop"
-alias et="edward tail"
-ert() {
-  edward restart $1 && edward tail $1
+function e() {
+  edward "$@"
 }
+function es() {
+  edward status "$@"
+}
+function et() {
+  edward tail "$@"
+}
+function ea() {
+  edward start "$@"
+}
+function eo() {
+  edward stop "$@"
+}
+function er() {
+  edward restart "$@"
+}
+function ert() {
+  edward restart -t "$@"
+}
+for prog in e es et ea eo er ert; do
+  PROG=$prog source $ALPHA/tools/bin/edward_autocomplete.sh
+done
 
 # Build
 export PATH=$PATH:$ALPHA/tools/khan
-export ANT_OPTS='-Xmx2G'
-#JVM_ARGS='-Dparallel=true -DretryCount=3 -Dyext.runmode=sandbox' 
-alias srcclean='rm -rf build; find src/com/yext -name 'tmp' | xargs rm -rf'
-alias icbm='python tools/icbm/build.py'
 alias icbmtestall='python tools/icbm/build.py :tests && ant test-icbm'
 alias icbmtest='python tools/icbm/build.py :tests && ./build/tests/tests org.junit.runner.JUnitCore $*'
-alias play='thirdparty/play/play'
-function bplay() {
-  echo -e '\033k'$1'\033\\' && icbm :$1_dev && play test src/com/yext/$1 ${@:2}
-}
-function bplayprod() {
-  echo -e '\033k'$1'\033\\' && icbm :$1_dev && YEXT_SITE=nj1 play test src/com/yext/$1 ${@:2}
-}
-function brun() {
-  echo -e '\033k'$1'\033\\' && icbm :$1 && YEXT_SITE=office JVM_ARGS='-Xmx3G' build/$1/$1 ${@:2}
-}
-export PLAY_ICBM_RELOAD=true
+#export PLAY_ICBM_RELOAD=true
 alias protos="make -C $ALPHA/gocode/src/yext protos"
 
 # Terraform
@@ -44,35 +46,22 @@ alias tpp="terraform plan -no-color | tee plan.txt | less"
 # MySQL
 export PATH="/usr/local/mysql/bin:$PATH"
 #export PATH="/usr/local/mysql-5.6.16-osx10.7-x86_64/bin:$PATH"
+function mycli-sdm () {
+  mycli --login-path="$1" --myclirc ~/.myclirc_sdm
+}
+_mycli_sdm_completions()
+{
+  COMPREPLY=($(compgen -W "$(sed -En 's/\[(.*)\]/\1/p' ~/.my.cnf)" "${COMP_WORDS[1]}"))
+}
+complete -F _mycli_sdm_completions mycli-sdm
 
 # Postgres
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.4/bin
 
-# JS
-function buildjs() {
-  for t in "$@"
-  do
-    bjst "${t}"
-  done
-
-  if [ $# = 0 ]; then
-    bjst
-  fi
-}
-function bjst() {
-  local p="src/com/yext"
-  if [ ! -z "$1" ]; then
-    p="${p}/${1}"
-  fi
-
-  for i in $(find "${p}" -name prod-config.js)
-  do
-    d=$(dirname $i)
-    echo "compiling ${d:13}..."
-    output=$($ALPHA/tools/bin/plovr.sh build $i 2>&1 > /dev/null)
-    echo "$output"
-  done
-}
+# Kafka
+if [ -f ~/.kafka/credentials ]; then
+  source ~/.kafka/credentials
+fi
 
 # Go
 export GOROOT=/usr/local/opt/go/libexec
@@ -81,24 +70,20 @@ export GOPATH=$ALPHA/gocode
 export PATH=$PATH:$GOPATH/bin
 
 # Python
-export PYTHONPATH=$PYTHONPATH:/usr/local/lib/python2.7/site-packages
+# export PYTHONPATH=$PYTHONPATH:/usr/local/lib/python2.7/site-packages
 
 # Git
-alias upload="git upload"
-up() {
-	local rev="@^!"
-	# Can optionally specify a number of commits back in history
-	if [[ $1 =~ ^[0-9]+$ ]] ; then
-		rev="@~${1}^!"
-		shift;
-	fi
-	git diff $rev | grep -C3 --color=always println || upload --rev=$rev $*
-}
+alias up="git upload"
 
 # Misc
 function ports() {
 	grep -r ^port:.*= $ALPHA/production/jobs | sed -E 's/^.*\/([a-zA-Z0-9]+)\.job.*"([a-z]+)=([0-9]+)"$/\3 \2 \1/' | sort -g | less
 }
+
+ulimit -n 32768 65536
+alias ulimit=:
+source $ALPHA/tools/bin/bash_helpers.sh
+unalias ulimit
 
 cd $ALPHA
 
