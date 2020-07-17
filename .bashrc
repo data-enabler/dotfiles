@@ -5,8 +5,6 @@ set -o vi
 
 # Prompt
 source ~/.git-prompt.sh
-#Append to history immediately, instead of on exit
-export PROMPT_COMMAND='history -a'
 export CLICOLOR=1
 export PS1='\[\e[1;32m\]\u@\h:\w${text}$\[\e[m\] '
 fancy_prompt() {
@@ -35,10 +33,12 @@ export PATH=/usr/local/lib/python2.7/site-packages:$PATH
 
 # History
 HISTCONTROL=ignoreboth
+#Unlimited
 HISTFILESIZE=""
 HISTSIZE=""
+#Append to history immediately, instead of on exit
 shopt -s histappend
-alias rehist="history -c; history -r"
+export PROMPT_COMMAND='history -a; history -n'
 
 # Recursive globbing
 shopt | grep -q globstar && shopt -s globstar
@@ -124,6 +124,6 @@ function gorun { gobuild "./${PWD##*/}"; }
 
 # fzf
 if [ -x "$(command -v fd)" ]; then
-  export FZF_DEFAULT_COMMAND='fd --type f'
+  export FZF_DEFAULT_COMMAND='fd --type f --hidden'
 fi
 

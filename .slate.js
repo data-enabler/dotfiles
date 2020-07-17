@@ -107,5 +107,6 @@ bind("m:ctrl;cmd", middleGen(0.5));
 bind("pad2:alt;cmd", middleGen(0.5));
 bind("return:alt;cmd", fullscreen);
 bind("left:alt;cmd", prevScreen);
+bind("left:ctrl;cmd", prevScreen);
 bind("right:alt;cmd", nextScreen);
 bind("right:ctrl;cmd", nextScreen);
