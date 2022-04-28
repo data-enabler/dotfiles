@@ -57,19 +57,19 @@ var rightGen = function(yOffset, ySize) {
 	];
 };
 
-var middleGen = function(yOffset) {
+var middleGen = function(yOffset, ySize) {
 	return [
 		slate.operation("move", {
 			"x" : "screenOriginX",
 			"y" : "screenOriginY + screenSizeY * " + yOffset,
 			"width" : "screenSizeX",
-			"height" : "screenSizeY * 1/2"
+			"height" : "screenSizeY * " + ySize
 		}),
 		slate.operation("move", {
 			"x" : "screenOriginX + screenSizeX * 1/3",
 			"y" : "screenOriginY + screenSizeY * " + yOffset,
 			"width" : "screenSizeX * 1/3",
-			"height" : "screenSizeY * 1/2"
+			"height" : "screenSizeY * " + ySize
 		})
 	];
 };
@@ -101,10 +101,12 @@ bind("o:ctrl;cmd", rightGen(0, 0.5));
 bind("pad9:alt;cmd", rightGen(0, 0.5));
 bind(",:ctrl;cmd", rightGen(0.5, 0.5));
 bind("pad3:alt;cmd", rightGen(0.5, 0.5));
-bind("i:ctrl;cmd", middleGen(0));
-bind("pad8:alt;cmd", middleGen(0));
-bind("m:ctrl;cmd", middleGen(0.5));
-bind("pad2:alt;cmd", middleGen(0.5));
+bind(".:ctrl;cmd", middleGen(0, 1));
+bind("pad5:alt;cmd", middleGen(0, 1));
+bind("i:ctrl;cmd", middleGen(0, 0.5));
+bind("pad8:alt;cmd", middleGen(0, 0.5));
+bind("m:ctrl;cmd", middleGen(0.5, 0.5));
+bind("pad2:alt;cmd", middleGen(0.5, 0.5));
 bind("return:alt;cmd", fullscreen);
 bind("left:alt;cmd", prevScreen);
 bind("left:ctrl;cmd", prevScreen);

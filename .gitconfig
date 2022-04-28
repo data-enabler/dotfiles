@@ -47,6 +47,7 @@
 	rc = rebase --continue
 	conflicts = diff --name-only --diff-filter=U
 	resolve = "!git conflicts | xargs git add"
+	fm = "!git fetch && git fetch . origin/master:master"
 
 	# branches
 	co = checkout

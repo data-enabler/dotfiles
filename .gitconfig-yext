@@ -2,6 +2,3 @@
 	name = Adrian Mullings
 	email = amullings@yext.com
 
-[alias]
-	upload = !\"$(git rev-parse --show-toplevel)\"/devops/git/bin/upload
-

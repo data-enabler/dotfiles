@@ -2,6 +2,7 @@
 export YEXT_OFFICE=ny
 export ALPHA=${ALPHA:-~/git/alpha}
 export ALPHA_HOME=$ALPHA
+export ORGMD_REPO=${ORGMD_REPO:-~/git/orgmd}
 
 # Navigation
 alias cda="cd $ALPHA"
@@ -34,9 +35,31 @@ function ert() {
 for prog in e es et ea eo ep er ert; do
   PROG=$prog source $ALPHA/tools/bin/edward_autocomplete.sh
 done
+function tls() {
+  dev tilty status "$@"
+}
+function tlt() {
+  dev tilty tail "$@"
+}
+function tla() {
+  dev tilty start --waitall "$@"
+}
+function tlo() {
+  dev tilty stop "$@"
+}
+function tlp() {
+  dev tilty stop "$@"
+}
+function tlr() {
+  dev tilty restart --waitall "$@"
+}
+function tlrt() {
+  dev tilty restart --waitall -t "$@"
+}
 
 # Build
 export PATH=$PATH:$ALPHA/tools/khan
+export PATH=$PATH:$ALPHA/tools/bin
 alias icbmtestall='python tools/icbm/build.py :tests && ant test-icbm'
 alias icbmtest='python tools/icbm/build.py :tests && ./build/tests/tests org.junit.runner.JUnitCore $*'
 #export PLAY_ICBM_RELOAD=true
@@ -76,6 +99,11 @@ export PATH=$PATH:$GOPATH/bin
 
 # Git
 alias up="git upload"
+
+# Kubernetes
+function agent() {
+  kubectl -n teamcity exec teamcity-agent-$1 --container teamcity-agent-container -it -- bash
+}
 
 # Misc
 function ports() {
