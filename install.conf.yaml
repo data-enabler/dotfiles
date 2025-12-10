@@ -10,6 +10,10 @@
     ~/.bashrc:
       path: '.bashrc'
       force: false
+    ~/.config/nvim/init.vim:
+      path: '.config/nvim/init.vim'
+      force: false
+      if: '[[ "$(uname)" == "Linux" ]]'
     ~/.vimrc: '.vimrc'
     ~/.gitconfig:
       path: '.gitconfig'
